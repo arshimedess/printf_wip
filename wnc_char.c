@@ -6,12 +6,14 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/27 15:28:52 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/27 16:37:55 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/27 20:27:24 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	wnc_char(char c, int fd)
+#include "ft_printf.h"
+
+int	wnc_char(char c)
 {
-	write (fd, &c, 1);
+	write (1, &c, 1);
 	return(1);
 }

@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/27 18:14:30 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/27 20:19:38 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,9 +15,9 @@
 int wnc_method(const char n)
 {
    if (n == 'c')
-      wnc_char(c, 1);
+      wnc_char(va_arg(ap, int));
    else if (n == 's')
-      wnc_str(c, 1);
+      wnc_str(c);
    else if (n == 'p')
       do this ;
    else if (n == 'd' || n == 'i')
