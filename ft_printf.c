@@ -6,16 +6,27 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/26 16:53:28 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/27 15:28:13 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
-// #include "ft_printf.h"
+#include "ft_printf.h"
 
-// int	printf(const char * format, ... );
-// {
-	
-// }
+int   printf(const char *format, ... )
+{
+   va_list  ap;
+   size_t   i;
+   size_t   count;
+
+   va_start(ap, format);
+   
+
+//just a simple write function that prints a string of char, "putstr, putchar"
+// then printf is that on steroid, we add some specifiers after %, we don't know how many '...'
+// new type of variable, va_list, and 3 very useful macros: va_start, va_arg & va_end
+
+
+}
 
 /* printf example */
 #include <stdio.h>
