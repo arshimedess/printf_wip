@@ -6,11 +6,49 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/27 15:28:13 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/27 18:14:30 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int wnc_method(const char n)
+{
+   if (n == 'c')
+      wnc_char(c, 1);
+   else if (n == 's')
+      wnc_str(c, 1);
+   else if (n == 'p')
+      do this ;
+   else if (n == 'd' || n == 'i')
+      do this ;
+   else if (n == 'u')
+      do this ;
+   else if (n == 'x')
+      do this ;
+   else if (n == 'X')
+      do this ;
+   else if (n == '%')
+      do this ;
+}
+
+int check_spec(const char n)
+{
+   char     *specs;
+   size_t   i;
+
+   specs = "cspdiuxX%";
+   i = 0;
+   while (specs[i] != '\0')
+   {
+      if(specs[i] == n)
+         {
+            wnc_method(n);
+         }
+      i++;
+   }
+   return(i);
+}
 
 int   printf(const char *format, ... )
 {
@@ -19,13 +57,21 @@ int   printf(const char *format, ... )
    size_t   count;
 
    va_start(ap, format);
-   
-
-//just a simple write function that prints a string of char, "putstr, putchar"
-// then printf is that on steroid, we add some specifiers after %, we don't know how many '...'
-// new type of variable, va_list, and 3 very useful macros: va_start, va_arg & va_end
-
-
+   i = 0;
+   while (format[i] != '\0')
+   {
+      count = 0;
+      if (format[i] == '%')
+      {
+         check_spec(format[i + 1]);
+         i++;
+      }
+      write(1, &format[i], 1);
+      i++;
+      count++;
+   }
+   va_end(ap);
+   return(count);
 }
 
 /* printf example */
