@@ -6,11 +6,23 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/28 17:35:01 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/28 17:50:33 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/28 18:44:09 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
+
+int str_len(char *s)
+{
+	int i;
+
+	i = 0;
+	while(s[i] != '\0')
+	{
+		i++;
+	}
+	return(i);
+}
 
 int	wnc_char(char c)
 {
@@ -34,7 +46,23 @@ int	wnc_str(char *s)
 	}
 	return(i);
 }
-int	wnc_nbr(int n)
+
+int wnc_ptr(void *s)
+{
+	int count;
+
+	write (1, "0x", 2);
+	count = 2;
+	while (s)
+	{
+		count += wnc_nbr(&s, "0123456789abcdef");
+	}
+	return(count);
+// similar to the wnc str, but needs to put 0x in front and its base 16	
+// so you can use wnc_nbr with base 16 in here, it's a mix of str and nbr!
+}
+
+int	wnc_nbr(int n, char *s)
 {
 	int		num;
 	int		base;
