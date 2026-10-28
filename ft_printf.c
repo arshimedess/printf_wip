@@ -6,30 +6,27 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/27 20:19:38 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/28 17:52:36 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int wnc_method(const char n)
+int wnc_method(const char n, va_list *ap)
 {
    if (n == 'c')
-      wnc_char(va_arg(ap, int));
-   else if (n == 's')
-      wnc_str(c);
-   else if (n == 'p')
-      do this ;
-   else if (n == 'd' || n == 'i')
-      do this ;
-   else if (n == 'u')
-      do this ;
-   else if (n == 'x')
-      do this ;
-   else if (n == 'X')
-      do this ;
+      return(wnc_char(va_arg(*ap, int)));
    else if (n == '%')
-      do this ;
+      return(wnc_char('%'));
+   else if (n == 's')
+      return(wnc_str(va_arg(*ap, char *)));
+   else if (n == 'p')
+      return(wnc_str(va_arg(*ap, void *)));
+   else if (n == 'd' || n == 'i')
+     return(wnc_nbr(va_arg(*ap, int)));
+   else if (n == 'u' || n == 'x' || n == 'X')
+     return(wnc_nbr(va_arg(*ap, unsigned int)));
+   return(0);
 }
 
 int check_spec(const char n)
@@ -54,7 +51,7 @@ int   printf(const char *format, ... )
 {
    va_list  ap;
    size_t   i;
-   size_t   count;
+   int   count;
 
    va_start(ap, format);
    i = 0;
@@ -72,20 +69,4 @@ int   printf(const char *format, ... )
    }
    va_end(ap);
    return(count);
-}
-
-/* printf example */
-#include <stdio.h>
-
-int main()
-{
-   printf ("Characters: %c %c \n", 'a', 65+32);
-   printf ("Decimals: %d %ld\n", 1977, 650000L);
-   printf ("Preceding with blanks: %10d \n", 1977);
-   printf ("Preceding with zeros: %010d \n", 1977);
-   printf ("Some different radices: %d %x %o %#x %#o \n", 100, 100, 100, 100, 100);
-   printf ("floats: %4.2f %+.0e %E \n", 3.1416, 3.1416, 3.1416);
-   printf ("Width trick: %*d \n", 5, 10);
-   printf ("%s \n", "A string");
-   return 0;
 }
