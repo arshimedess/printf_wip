@@ -6,37 +6,38 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/28 17:35:01 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/30 17:48:28 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 18:51:17 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ft_printf.h"
 
-int str_len(char *s)
+int	str_len(char *s)
 {
-	int len;
+	int	len;
 
 	len = 0;
-	while(s[len] != '\0')
+	while (s[len] != '\0')
 	{
 		len++;
 	}
-	return(len);
+	return (len);
 }
 
 int	wnc_char(char c)
 {
 	write (1, &c, 1);
-	return(1);
+	return (1);
 }
+
 int	wnc_str(char *s)
 {
 	int	count;
 
 	if (s == NULL)
-	{	
+	{
 		write (1, "(null)", 6);
-		return(6);
+		return (6);
 	}
 	count = 0;
 	while (s[count] != '\0')
@@ -44,20 +45,20 @@ int	wnc_str(char *s)
 		write (1, &s[count], 1);
 		count++;
 	}
-	return(count);
+	return (count);
 }
 
-int wnc_ptr(void *s)
+int	wnc_ptr(void *s)
 {
-	int count;
+	int	count;
 
 	write (1, "0x", 2);
 	count = 2;
 	count += wnc_nbr((unsigned long)s, "0123456789abcdef");
-	return(count);
+	return (count);
+}
 // similar to the wnc str, but needs to put 0x in front and its base 16	
 // so you can use wnc_nbr with base 16 in here, it's a mix of str and nbr!
-}
 
 int	wnc_nbr(long n, char *s)
 {
@@ -82,7 +83,7 @@ int	wnc_nbr(long n, char *s)
 		count += wnc_nbr(n / base, s);
 		count += wnc_nbr(n % base, s);
 	}
-	return(count);
+	return (count);
 }
 
 // we have to cover base 10, and base 16
