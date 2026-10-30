@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/28 17:35:01 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/30 17:32:23 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 17:48:28 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,10 +53,7 @@ int wnc_ptr(void *s)
 
 	write (1, "0x", 2);
 	count = 2;
-	while (s)
-	{
-		count += wnc_nbr((unsigned long)s, "0123456789abcdef");
-	}
+	count += wnc_nbr((unsigned long)s, "0123456789abcdef");
 	return(count);
 // similar to the wnc str, but needs to put 0x in front and its base 16	
 // so you can use wnc_nbr with base 16 in here, it's a mix of str and nbr!

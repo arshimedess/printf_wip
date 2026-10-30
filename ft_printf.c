@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/30 17:42:58 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 17:51:59 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,10 +70,8 @@ int   ft_printf(const char *format, ... )
          i++;
       }
       else
-         {
-            count += write(1, &format[i], 1);
-            i++;
-         }
+         count += write(1, &format[i], 1);
+      i++;
    }
    va_end(ap);
    return(count);
@@ -86,6 +84,6 @@ int	main(void)
    int a = 10;
 
    printf("Original:: %% %c %s %p %d %i %u %x %X\n",'a',"A string",&s,a,a,a,a,a);
-   ft_printf("Mine::: %% %c %s %p %d %i %u %x %X\n",'a',"A string",&s,a,a,a,a,a);
+   ft_printf("Mine:::::: %% %c %s %p %d %i %u %x %X\n",'a',"A string",&s,a,a,a,a,a);
 	return (0);
 }
