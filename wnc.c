@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        ::::::::            */
-/*   writencount.c                                      :+:    :+:            */
+/*   wnc.c                                              :+:    :+:            */
 /*                                                     +:+                    */
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/28 17:35:01 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/28 18:44:09 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 17:32:23 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,14 +14,14 @@
 
 int str_len(char *s)
 {
-	int i;
+	int len;
 
-	i = 0;
-	while(s[i] != '\0')
+	len = 0;
+	while(s[len] != '\0')
 	{
-		i++;
+		len++;
 	}
-	return(i);
+	return(len);
 }
 
 int	wnc_char(char c)
@@ -31,20 +31,20 @@ int	wnc_char(char c)
 }
 int	wnc_str(char *s)
 {
-	int	i;
+	int	count;
 
 	if (s == NULL)
 	{	
 		write (1, "(null)", 6);
 		return(6);
 	}
-	i = 0;
-	while (s[i] != '\0')
+	count = 0;
+	while (s[count] != '\0')
 	{
-		write (1, &s[i], 1);
-		i++;
+		write (1, &s[count], 1);
+		count++;
 	}
-	return(i);
+	return(count);
 }
 
 int wnc_ptr(void *s)
@@ -55,40 +55,35 @@ int wnc_ptr(void *s)
 	count = 2;
 	while (s)
 	{
-		count += wnc_nbr(&s, "0123456789abcdef");
+		count += wnc_nbr((unsigned long)s, "0123456789abcdef");
 	}
 	return(count);
 // similar to the wnc str, but needs to put 0x in front and its base 16	
 // so you can use wnc_nbr with base 16 in here, it's a mix of str and nbr!
 }
 
-int	wnc_nbr(int n, char *s)
+int	wnc_nbr(long n, char *s)
 {
-	int		num;
 	int		base;
-	long	tmp;
 	int		count;
 
-	if (base == 10);
-	
+	base = strlen(s);
 	count = 0;
-	tmp = n;
-	if (tmp < 0)
+	if (n < 0)
 	{
 		write(1, "-", 1);
-		tmp = tmp * -1;
-		count += 1;
+		n = n * -1;
+		count++;
 	}
-	if (tmp >= 0 && tmp <= 9)
+	if (n < base)
 	{
-		num = tmp + '0';
-		write(1, &num, 1);
+		write(1, &s[n], 1);
 		count++;
 	}
 	else
 	{
-		ft_putnbr_fd(tmp / 10, 1);
-		ft_putnbr_fd(tmp % 10, 1);
+		count += wnc_nbr(n / base, s);
+		count += wnc_nbr(n % base, s);
 	}
 	return(count);
 }

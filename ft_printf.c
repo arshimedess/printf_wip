@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/28 18:25:45 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 17:42:58 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,28 +33,32 @@ static int wnc_method(const char n, va_list *ap)
    return(0);
 }
 
-static int check_spec(const char n)
+static int check_spec(const char n, va_list *ap)
 {
-   char     *specs;
+   char  *specs;
    int   i;
+   int   count;
 
+   count = 0;
    specs = "cspdiuxX%";
    i = 0;
    while (specs[i] != '\0')
    {
       if(specs[i] == n)
-            wnc_method(n);
+            count += wnc_method(n, ap);
       i++;
    }
-   return(0);
+   return(count);
 }
 
-int   printf(const char *format, ... )
+int   ft_printf(const char *format, ... )
 {
    va_list  ap;
    size_t   i;
    int   count;
 
+   if (!format)
+      return(-1);
    va_start(ap, format);
    i = 0;
    while (format[i] != '\0')
@@ -62,13 +66,26 @@ int   printf(const char *format, ... )
       count = 0;
       if (format[i] == '%')
       {
-         check_spec(format[i + 1]);
+         count += check_spec(format[i + 1], &ap);
          i++;
       }
-      write(1, &format[i], 1);
-      i++;
-      count++;
+      else
+         {
+            count += write(1, &format[i], 1);
+            i++;
+         }
    }
    va_end(ap);
    return(count);
+}
+// what if "sth sth %" ? then format[i + 1] will give seg fault. we need to fix that.
+
+int	main(void)
+{
+   char *s;
+   int a = 10;
+
+   printf("Original:: %% %c %s %p %d %i %u %x %X\n",'a',"A string",&s,a,a,a,a,a);
+   ft_printf("Mine::: %% %c %s %p %d %i %u %x %X\n",'a',"A string",&s,a,a,a,a,a);
+	return (0);
 }
