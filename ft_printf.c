@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/26 12:38:18 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/30 19:04:45 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 19:26:36 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,10 +61,10 @@ int	ft_printf(const char *format, ...)
 		return (-1);
 	va_start(ap, format);
 	i = 0;
+	count = 0;
 	while (format[i] != '\0')
 	{
-		count = 0;
-		if (format[i] == '%')
+		if (format[i] == '%' && format[i + 1] != '\0')
 		{
 			count += check_spec(format[i + 1], &ap);
 			i++;
@@ -73,20 +73,6 @@ int	ft_printf(const char *format, ...)
 			count += write(1, &format[i], 1);
 		i++;
 	}
-	va_end (ap);
+	va_end(ap);
 	return (count);
 }
-
-//"sth sth %" ? then format[i + 1] will give seg fault. we need to fixit
-
-// int	main(void)
-// {
-//    char *s;
-//    int a = 9991786;
-
-//    printf("Original:: %% %c %s %p %d %i %u %x %X\n",'a',
-// "A string",&s,a,a,a,a,a);
-//    ft_printf("Mine:::::: %% %c %s %p %d %i %u %x %X\n",'a',
-// "A string",&s,a,a,a,a,a);
-// 	return (0);
-// }

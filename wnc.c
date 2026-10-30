@@ -6,7 +6,7 @@
 /*   By: ahossein <ahossein@student.codam.nl>         +#+                     */
 /*                                                   +#+                      */
 /*   Created: 2026/10/28 17:35:01 by ahossein      #+#    #+#                 */
-/*   Updated: 2026/10/30 18:51:17 by ahossein      ########   odam.nl         */
+/*   Updated: 2026/10/30 19:38:23 by ahossein      ########   odam.nl         */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ int	wnc_ptr(void *s)
 {
 	int	count;
 
+	if (s == NULL)
+	{
+		write (1, "(nil)", 5);
+		return (5);
+	}
 	write (1, "0x", 2);
 	count = 2;
 	count += wnc_nbr((unsigned long)s, "0123456789abcdef");
